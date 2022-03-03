@@ -95,3 +95,16 @@ const tahoe2 = {
     }
 }
 tahoe2.print()
+
+// 对象和数组
+const animal = {
+    a_name: 'Tim',
+    a_age: 199
+}
+
+const {a_name, a_age} = animal
+console.log(`${a_name} ${a_age}`)
+
+//a_name = "George"
+//a_age = 188
+//console.log(`${animal.a_name} ${animal.a_age}`)
