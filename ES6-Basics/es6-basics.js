@@ -108,3 +108,5 @@ console.log(`${a_name} ${a_age}`)
 //a_name = "George"
 //a_age = 188
 //console.log(`${animal.a_name} ${animal.a_age}`)
+
+
