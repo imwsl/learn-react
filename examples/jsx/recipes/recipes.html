@@ -8,15 +8,9 @@
         <!-- 目标容器-->
         <div id="root"></div>
 
-        <div id="list"></div>
+	<!-- React Fragment Example -->
+	<div id="fragment"></div>
 
-        <div id="first"></div>
-
-        <div id="second"></div>
-        
-        <div id="third"></div>
-
-        <div id="ele"></div>
     </body>
     <!-- 创建HTML Element -->
     <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
@@ -114,5 +108,20 @@
       ReactDOM.render(
 	      <Menu recipes={data} title="Delicious Recipes"/>, document.getElementById('root')
       )
+
+      //
+      // React Fragments Example
+      // *React.Fragment保证了在Component里面写多个标签的页面
+      // *React.Fragment的简写是<></>
+      function Cat({name}) {
+	  return (
+		  <React.Fragment>
+		  <h1>猫的名字是 {name}</h1>
+		  <p>她是一只好猫!</p>
+	      </React.Fragment>
+	  )
+      }
+
+      ReactDOM.render(<Cat name="Joe" />, document.getElementById('fragment'))
     </script>
 </html>
