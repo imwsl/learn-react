@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>React Example</title>
+    </head>
+    <body>
+        <!-- 目标容器-->
+        <div id="root"></div>
+
+        <div id="list"></div>
+
+        <div id="first"></div>
+
+        <div id="second"></div>
+        
+        <div id="third"></div>
+
+        <div id="ele"></div>
+    </body>
+    <!-- 创建HTML Element -->
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+
+    <!-- 渲染HTML DOM -->
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+
+    <!-- 我们项目的代码在这里 -->
+    <style type="text/css">
+    .bg-color {
+        background-color: red; 
+    }
+    </style>
+    <script>
+        // 创建DOM片段
+        const dish = React.createElement("h1", null, "Baked Salmon")
+
+        const dessert = React.createElement("h2", null, "海滩，椰树，落日")
+
+        // 渲染DOM
+        // * DOM一切渲染都在ReactDOM之中，在react16之前，ReactDOM一次只能渲染渲染一个元素
+        // * 现在可以可以渲染数组 ReactConf 2017
+        ReactDOM.render([dish, dessert], document.getElementById("root"))
+
+        // 映射数组
+        const items = [
+            "One",
+            "Two",
+            "Three",
+            "Four",
+            "Five",
+            "Six"
+        ]
+
+        const listElem = React.createElement(
+            "ul",
+            null,
+            items.map((item, i) => {
+                return i % 2 == 0 ? React.createElement("li", {className: "bg-color", key: i}, item) : React.createElement("li", {key: i}, item)
+                    
+            })
+        )
+        ReactDOM.render(listElem, document.getElementById("list"))
+
+        // 创建React组件
+        //
+
+        // * 第一种组件模式，函数：返回element片段
+        function firstElmFun() {
+            let elems = ["Apple", "Pear", "Watermelo", "Banana"]
+            return React.createElement("ul", null,
+                elems.map((elem, i) => {
+                    return React.createElement("li", {key: i}, elem)
+                })
+            )
+        }
+        ReactDOM.render(React.createElement(firstElmFun, null, null), document.getElementById("first"))
+
+        // * 但是这样的组件不够灵活，如果我们要实时改变组件对应的展示，这种就不够灵活
+        // * 因此，我们需要一种方法，读取prop的内容，如下
+
+        function secondElmFun(prop) {
+            return React.createElement("ul", null,
+                prop.elems.map((elem, i) => {
+                    return React.createElement("li", {key: i}, elem)
+                })
+            )
+        }
+        ReactDOM.render(React.createElement(secondElmFun, {elems: ['Pig', 'Dog', 'Fox']}, null), document.getElementById("second"))
+    
+    
+        // * 可以修改的更加灵活一点，直接解析prop里面的元素
+        function thirdElmFun({elems}) {
+            return React.createElement("ul", null,
+                elems.map((elem, i) => {
+                    return React.createElement("li", {key: i}, elem)
+                })
+            )
+        }
+        ReactDOM.render(React.createElement(secondElmFun, {elems: ['Shenzhen', 'Wuhan', 'Shanghai', 'Chongqing']}, null), document.getElementById("third"))
+    
+    
+        // ES2015之后，可以使 用类组件
+        //
+        class Elem extends React.Component {
+            render() {
+                return React.createElement(
+                    "ul",
+                    null,
+                    this.props.items.map((item, i) =>
+                        React.createElement("li", {key: i}, item)    
+                    )
+                )
+            }
+        }
+
+      //ReactDOM.render(<Elem />, document.getElementById("elem")) 这是JSX语法，因此在html页面的Script里面不会执行 
+    </script>
+</html>

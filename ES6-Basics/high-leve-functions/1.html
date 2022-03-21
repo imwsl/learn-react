@@ -1,0 +1,26 @@
+<html><!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Promise</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+
+// compose
+// 1、一组函数的组合
+// 2、除了第一个函数接受参数以外，剩下的函数的参数是前一个函数的返回值
+const toUpper = (str) => (str.toUpperCase())
+const greeting = (str) => console.log(`Hi ${str}`)
+const both = compose(
+    toUpper,
+    greeting
+)
+
+both('jack dorsey')
+
+</script>
+</html>
