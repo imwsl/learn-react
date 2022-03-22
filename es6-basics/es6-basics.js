@@ -110,3 +110,4 @@ console.log(`${a_name} ${a_age}`)
 //console.log(`${animal.a_name} ${animal.a_age}`)
 
 
+
