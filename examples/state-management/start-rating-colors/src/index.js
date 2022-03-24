@@ -6,13 +6,13 @@ import reportWebVitals from './reportWebVitals';
 import StarRating from './StarRating'
 import NewStarRating from './NewStarRating'
 
+
 ReactDOM.render(
   <React.StrictMode>
-    <StarRating />
-    <NewStarRating 
-      style={{backgroundColor: "lightblue"}}
-      onDoubleClick={e=>alert("double clicked!!")}
-    />
+    
+
+    <App/>
+    
   </React.StrictMode>,
   document.getElementById('root')
 );
