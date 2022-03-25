@@ -20,7 +20,7 @@ function NewStarRating({style = {}, totalStars = 5, ...props}) {
              <Star 
                 key={i} 
                 selected={selectedStars > i}
-                onSelect={() => setSelectedStars(i+1)}
+                onClick={() => setSelectedStars(i)}
             />
           ))}
          <p>{selectedStars} of {totalStars} stars.</p>

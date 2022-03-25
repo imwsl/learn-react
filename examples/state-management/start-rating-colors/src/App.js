@@ -5,8 +5,21 @@ import ColorList from './ColorList'
 import React, {useState} from "react"
 
 function App() {
-  const [colors] = useState(colorData)
-  return <ColorList colors={colors}/>
+  // useState返回colors 和 setColors
+  const [colors, setColors] = useState(colorData)
+  return <ColorList colors={colors} onRemoveColor={id => {
+    const newColors = colors.filter(color => color.id != id)
+    setColors(newColors)
+  }} onSelect={(id, i) => {
+    console.log(` id => ${id} i => ${i}`)
+    const newColors = colors.map(color => {
+      if (color.id === id) {
+        color.rating = i
+      }
+      return color
+    })
+    setColors(newColors)
+  }}/>
 }
 
 export default App;

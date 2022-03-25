@@ -3,15 +3,15 @@
 import NewStarRating from "./NewStarRating"
 import { FaTrash } from "react-icons/fa"
 
-export default function Color({id, title, color, rating}) {
+export default function Color({id, title, color, rating, onRemove=f=>f, onSelect=f=>f}) {
     return (
         <section>
             <h1>{title}</h1>
-            <button>
+            <button onClick={() => onRemove(id)}>
                 <FaTrash/>
             </button>
             <div style={{backgroundColor:color}}>
-                <NewStarRating selectedStars={rating}/>
+                <NewStarRating id={id} selectedStars={rating} onSelect={onSelect}/>
             </div>
         </section>
     )
