@@ -1,18 +1,17 @@
-import React from 'react';
+import React, {createContext} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import StarRating from './StarRating'
-import NewStarRating from './NewStarRating'
+import ColorProvider from './ColorProvider';
 
+export const ColorContext = createContext();
 
 ReactDOM.render(
   <React.StrictMode>
-    
-
-    <App/>
-    
+    <ColorProvider>
+      <App/>
+    </ColorProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -1,10 +1,13 @@
-import React, {useRef, useState} from "react";
+import React, {useContext} from "react";
+import { ColorContext } from ".";
 import { useInput } from "./UseInput";
 
 export default function AddColorForm({newColor = f => f}) {
    
     const [titleProps, resetTitle] = useInput("")
     const [hexProps, resetHex] = useInput("#000000")
+
+    const colors = useContext(ColorContext)
 
     const submit = e => {
         e.preventDefault()
