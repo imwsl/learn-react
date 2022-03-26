@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>React Example</title>
+    </head>
+    <body>
+        <!-- 目标容器-->
+        <div id="root"></div>
+
+	<!-- React Fragment Example -->
+	<div id="fragment"></div>
+
+    </body>
+    <!-- 创建HTML Element -->
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+
+    <!-- 渲染HTML DOM -->
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+
+    <!-- 浏览器里面使用Babel 这样浏览器可以识别JSX语法 -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+
+    <!-- 我们项目的代码在这里 -->
+    <style type="text/css">
+    .bg-color {
+        background-color: red; 
+    }
+    </style>
+    
+    <script type="text/babel">
+      const data = [
+	  {
+	      name: "Baked Salmon",
+	      ingredients: [
+		  {name: "Salmon", amount: 1, measurement: "l lb"},
+		  {name: "Pine Nuts", amount: 1, measurement: "cup"},
+		  {name: "Butter Lettuce", amount: 2, measurement: "cups"},
+		  {name: "Yellow Squash", amount: 1, measurement: "med"},
+		  {name: "Olive Oil", amount: 0.5, measurement: "cup"},
+		  {name: "Garlic", amount: 3, measurement: "cloves"}
+	      ],
+	      steps: [
+		  "Preheat the oven to 350 degrees.",
+		  "Spread the olive oil around a glass baking dish.",
+		  "Add the yellow squash and place in the oven for 30 mins.",
+		  "Add the salmon, garlic, and pine nuts to the dish.",
+		  "Bake for 15 minutes.",
+		  "Remove from oven. Add the lettuce and serve."
+	      ]
+	  },
+
+	  {
+	      name: "Fish Tacos",
+	      ingredients: [
+		  {name: "Whitefish", amount: 1, measurement: "1 lb"},
+		  {name: "Cheese", amount: 1, measurement: "cup"},
+		  {name: "Iceberg Lettuce", amount: 2, measurement: "cups"},
+		  {name: "Tomatoes", amount: 2, measurement: "large"},
+		  {name: "Tortillas", amount: 3, measurement: "med"}
+	      ],
+	      steps: [
+		  "Cook the fish on the grill until cooked through.",
+		  "Place the fish on the 3 tortillas.",
+		  "Top them with lettuce, tomatoes, and cheese."
+	      ]
+	  }
+      ]
+
+      // JSX 语法
+      function Menu(props) {
+	  return (
+		  <article>
+		  <header>
+		  <h1>{props.title}</h1>
+		  </header>
+		  <div className="recipes">
+		  {props.recipes.map((recipe, i) => (
+			  <Recipe key={i} {...recipe}/>
+		  ))}
+	      </div>
+	      </article>
+	  )
+      }
+
+      function Recipe({name, ingredients, steps}) {
+	  return (
+		  <section id={name.toLowerCase().replace(/ /g, "-")}>
+		  <h1>{name}</h1>
+		  <ul className="ingredients">
+		  {ingredients.map((ingredient, i) => (
+			  <li key={i}>{ingredient.name}</li>
+		  ))}
+	      </ul>
+		  <section className="instructions">
+		  <h2>Cooking Instructions</h2>
+		  {
+		      steps.map((step, i) => (
+			      <p key={i}>{step}</p>
+		      ))
+		  }
+	      </section>
+	      </section>
+	  )
+      }
+
+      ReactDOM.render(
+	      <Menu recipes={data} title="Delicious Recipes"/>, document.getElementById('root')
+      )
+
+      //
+      // React Fragments Example
+      // *React.Fragment保证了在Component里面写多个标签的页面
+      // *React.Fragment的简写是<></>
+      function Cat({name}) {
+	  return (
+		  <React.Fragment>
+		  <h1>猫的名字是 {name}</h1>
+		  <p>她是一只好猫!</p>
+	      </React.Fragment>
+	  )
+      }
+
+      ReactDOM.render(<Cat name="Joe" />, document.getElementById('fragment'))
+    </script>
+</html>

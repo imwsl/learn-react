@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>React Example</title>
+    </head>
+    <body>
+        <!-- 目标容器-->
+        <div id="root"></div>
+
+        <!-- prop.children 使用子元素创建 -->
+        <div id="list"></div>
+
+        <!-- class-->
+        <div id="first"></div>
+    </body>
+    <!-- 创建HTML Element -->
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+
+    <!-- 渲染HTML DOM -->
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+
+    <!-- 我们项目的代码在这里 -->
+    <style type="text/css">
+    .bg-color {
+        background-color: red; 
+    }
+    </style>
+    <script>
+        // 创建DOM片段
+        const dish = React.createElement("h1", null, "Baked Salmon")
+
+        const dessert = React.createElement("h2", null, "海滩，椰树，落日")
+
+        // 渲染DOM
+        // * DOM一切渲染都在ReactDOM之中，在react16之前，ReactDOM一次只能渲染渲染一个元素
+        // * 现在可以可以渲染数组 ReactConf 2017
+        ReactDOM.render([dish, dessert], document.getElementById("root"))
+
+        // prop.children
+        const list = React.createElement(
+            "ul",
+            null,
+            React.createElement("li", null, "one"),
+            React.createElement("li", null, "two"),
+            React.createElement("li", null, "three"),
+            React.createElement("li", null, "four")
+        )
+        console.log(list)
+        ReactDOM.render(list, document.getElementById("list"))
+
+        // className 测试
+        const classElem = React.createElement(
+            "section",
+            null,
+            React.createElement("h1", null, "测试"),
+            React.createElement(
+                "ul",
+                null,
+                React.createElement("li", {className: "bg-color"}, "第一行"),
+                React.createElement("li", null, "第二行"),
+                React.createElement("li", null, "第二行")
+            )
+        )
+        ReactDOM.render(classElem, document.getElementById("first"))
+    </script>
+</html>

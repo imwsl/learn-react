@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>React Example</title>
+    </head>
+    <body>
+        <!-- 目标容器-->
+        <div id="root"></div>
+    </body>
+    <!-- 创建HTML Element -->
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+
+    <!-- 渲染HTML DOM -->
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+
+    <!-- 我们项目的代码在这里 -->
+    <script>
+        // 创建DOM片段
+        const dish = React.createElement("h1", null, "Baked Salmon")
+
+        // 渲染DOM
+        ReactDOM.render(dish, document.getElementById("root"))
+    </script>
+</html>
