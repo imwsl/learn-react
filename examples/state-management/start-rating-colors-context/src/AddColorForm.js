@@ -1,19 +1,19 @@
-import React, {useContext} from "react";
-import { ColorContext } from ".";
+import React from "react";
 import { useInput } from "./UseInput";
+import { useColors } from "./color-hooks";
+import {v4} from 'uuid'
 
-export default function AddColorForm({newColor = f => f}) {
+export default function AddColorForm() {
    
     const [titleProps, resetTitle] = useInput("")
     const [hexProps, resetHex] = useInput("#000000")
-
-    const colors = useContext(ColorContext)
+    const {addColor} = useColors()
 
     const submit = e => {
         e.preventDefault()
 
-        newColor(titleProps.value, hexProps.value)
-
+        //添加新的color到color list列表
+        addColor(titleProps.value, hexProps.value)
         resetTitle()
         resetHex()
     }

@@ -1,6 +1,8 @@
 import React, {useRef, useState} from "react";
 import { useInput } from "./UseInput";
 
+import { useColors } from "./color-hooks";
+
 export default function AddForm({newColor = f => f}) {
     // store form data
     //const hexTitle = useRef()
