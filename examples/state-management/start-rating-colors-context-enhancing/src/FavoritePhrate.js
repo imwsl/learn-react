@@ -19,6 +19,20 @@ export default function FavoritePhrase() {
         console.log(`saved phrase: "${phrase}"`)
     }, [phrase])
 
+    // val phrase某一个值变化
+    useEffect(() => {
+        console.log('val or phrase changed...')
+    }, [val, phrase])
+
+    // 初始化的时候调用
+    useEffect(() => {
+        console.log('call once after initial render') // call once after initial render
+
+        return () => {
+            console.log('call once after teardown') // call once after teardown
+        }
+    }, [])
+
     return (
         <>
             <label>Favorite phrase:</label>
