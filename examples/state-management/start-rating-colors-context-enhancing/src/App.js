@@ -6,6 +6,7 @@ import AddColorForm from './AddColorForm';
 import ColorProvider from './color-hooks';
 import CheckBox from './CheckBox'
 import FavoritePhrase from './FavoritePhrate';
+import ForceRenderApp from './ForceRenderApp';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <ColorList />
       <CheckBox />
       <FavoritePhrase />
+      <ForceRenderApp />
     </ColorProvider>
   </>
   )
