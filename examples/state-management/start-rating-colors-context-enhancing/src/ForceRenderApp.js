@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from "react";
 
-function useAnyKeyToRender() {
+const words = ["One", "Two", "Three"]
+
+export function useAnyKeyToRender() {
     const [, forceRender] = useState()
 
     useEffect(() => {
@@ -16,6 +18,10 @@ export default function ForceRenderApp() {
     useEffect(() => {
         console.log("keydown render....")
     })
+
+    useEffect(() => {
+        console.log("words array fresh render...")
+    }, [words])
 
     return (
     <>

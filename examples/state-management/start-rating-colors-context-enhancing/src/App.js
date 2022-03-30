@@ -7,6 +7,7 @@ import ColorProvider from './color-hooks';
 import CheckBox from './CheckBox'
 import FavoritePhrase from './FavoritePhrate';
 import ForceRenderApp from './ForceRenderApp';
+import { WordCount } from './WordCount';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <CheckBox />
       <FavoritePhrase />
       <ForceRenderApp />
+      <WordCount>You are not going to believe this but...</WordCount>
     </ColorProvider>
   </>
   )
