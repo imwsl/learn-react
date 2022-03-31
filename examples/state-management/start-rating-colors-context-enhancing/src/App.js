@@ -8,6 +8,9 @@ import CheckBox from './CheckBox'
 import FavoritePhrase from './FavoritePhrate';
 import ForceRenderApp from './ForceRenderApp';
 import { WordCount } from './WordCount';
+import CatList from './CatsList';
+import Cat from './Cat';
+import MemoCatList from './MemoCatList';
 
 function App() {
   return (
@@ -19,6 +22,8 @@ function App() {
       <FavoritePhrase />
       <ForceRenderApp />
       <WordCount>You are not going to believe this but...</WordCount>
+      <CatList /> 
+      <MemoCatList/>
     </ColorProvider>
   </>
   )

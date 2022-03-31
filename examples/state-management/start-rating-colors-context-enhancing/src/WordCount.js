@@ -1,7 +1,15 @@
-import React, { useEffect, useMemo, useCallback } from "react";
+import React, { useEffect, useMemo, useCallback, useLayoutEffect, useReducer} from "react";
 import { useAnyKeyToRender } from "./ForceRenderApp";
 
+function mousePosition({x, y}) {
+    console.log(`my mouse position ${x}, ${y}`)
+}
+
 export function WordCount({children = ""}) {
+
+    const [checked, toggle] = useReducer(checked => !checked, false)
+    const [number, setNumber] = useReducer((number, newNumber) => number + newNumber, 0)
+
     useAnyKeyToRender()
 
     const words = children.split(" ")
@@ -29,10 +37,26 @@ export function WordCount({children = ""}) {
         fn()
     }, [fn])
 
+    // window.addEventListener("mousemove", function(e){
+    //     console.log("mouse move....")
+    // })
+
+    // useLayoutEffect invokes before useEffect
+    // we can do some front works
+    useLayoutEffect(() => {
+        console.log("useLayoutEffect call once...")
+        window.addEventListener("mousemove", mousePosition)
+        return () => window.removeEventListener("mousemove", mousePosition)
+    }, [])
+
     return (<>
         <p>{children}</p>
         <p>
             <strong> {words.length} - words </strong>
         </p>
+        <input type="checkbox" value={checked} onChange={toggle}/>
+        <p>{checked ? "Checked" : "Not Checked"}</p>
+
+        <h1 onClick={() => setNumber(30)}>{number}</h1>
     </>)
 }
