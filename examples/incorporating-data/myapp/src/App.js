@@ -10,6 +10,10 @@ import { NewGithubUser001 } from './NewGithubUser';
 
 import SearchPanel from './SearchPanel';
 
+import { FetchUriComponent } from './Fetch';
+
+import { useIterator } from './ArrayIterator';
+
 const renderItem = (item, i) => (
   <div style={{display: "flex"}} key={i}>
     <img src={item.avatar} alt={item.name} width={50}/>
@@ -34,6 +38,8 @@ function App() {
     avatar: faker.internet.avatar()
   }))
 
+  const [letter, prev, next] = useIterator(['a', 'b', 'c'])
+
   return (
     <div className="App">
       <GithubUser login="moonhighway"/>
@@ -45,8 +51,34 @@ function App() {
       <NewGithubUser001 login="moontahoe"/>
 
       <SearchPanel />
+
+      <FetchUriComponent
+        uri={`https://api.github.com/users/wesley7891`}
+        renderSucc={UserDetails}
+      />
+
+      <div>
+        <p>{letter}</p>
+        <button type="button" onClick={() => {next()}}>next</button>
+        <button type="button" onClick={() => {next()}}>prev</button>
+      </div>
     </div>
   );
+}
+
+function UserDetails({data}) {
+  return <div className='githubUser'>
+            <img
+                src={data.avatar_url}
+                alt={data.login}
+                style={{width: 200}}
+            />
+            <div>
+                <h1>{data.login}</h1>
+                {data.name && <p>{data.name}</p>}
+                {data.location && <p>{data.location}</p>}
+            </div>
+        </div>
 }
 
 export default App;

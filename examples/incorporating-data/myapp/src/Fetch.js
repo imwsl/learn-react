@@ -23,3 +23,18 @@ export function FetchUri(uri) {
         error
     }
 }
+
+export function FetchUriComponent({
+    uri,
+    renderSucc,
+    loadingFallback=<p>Loading...</p>,
+    renderError = error => (
+        <pre>JSON.stringify(error, null, 2)</pre>
+    )
+}) {
+    console.log(`FetchUriComponent uri ${uri}`)
+    const {loading, data, error} = FetchUri(uri)
+    if (loading) return loadingFallback
+    if (error) return renderError(error)
+    if (data) return renderSucc({data})
+}

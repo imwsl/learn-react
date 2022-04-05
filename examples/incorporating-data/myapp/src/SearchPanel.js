@@ -1,19 +1,32 @@
 import React, {useState} from "react";
+import { GithubRepo } from "./GithubRepo";
 import { NewGithubUser001 } from "./NewGithubUser";
 
 export default function SearchPanel() {
-    const [login, setLogin] = useState("moontahoe")
-
+    const [login, setLogin] = useState("wesley7891")
+    const [value, setValue] = useState("wesley7891")
     return (<>
         <div>
-            <form>
+            <form onSubmit={(event) => {
+                event.preventDefault()
+                setLogin(event.target[0].value)
+            }}>
                 <input
-                    value={login}
                     type="text"
+                    value={value}
+                    onChange={(e) => setValue(e.target.value)}
                     placeholder="please enter the github user name..."
                 />
-                <button type="sublit" onClick={() => setLogin(login)}>Search</button>
+                <button type="submit">Search</button>
+                <button type="button" onClick={() => {
+                    setValue("")
+                    setLogin("")
+                }}>clear</button>
             </form>
         </div>
+
+        <NewGithubUser001 login={login}/>
+
+        <GithubRepo login={login}/>
     </>)
 }
