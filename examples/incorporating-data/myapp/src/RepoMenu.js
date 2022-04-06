@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useMemoIterator } from "./ArrayIterator";
 import { FetchUri } from "./Fetch";
 import ReactMarkdown from 'react-markdown';
+import { Buffer } from "buffer";
 import "./App.css"
 
 export function RepoMenu({
@@ -11,6 +12,8 @@ export function RepoMenu({
     const [{name}, prev, next] = useMemoIterator(repos)
     const [repoName, setRepoName] = useState("")
     const [url, setUrl] = useState("")
+    const [markdown, setMarkdown] = useState("")
+
     const {loading, data, error} = FetchUri(
         url
     )
@@ -23,6 +26,14 @@ export function RepoMenu({
         setUrl(url)
     }, [name])
 
+    useEffect(() => {
+        if (!data) {
+            setMarkdown("#this is no readme!!")
+            return
+        }
+        setMarkdown(Buffer.from(data.content, 'base64').toString('utf-8'))
+    }, [data])
+
     return (
         <>
             <div className="repo">
@@ -31,7 +42,7 @@ export function RepoMenu({
                 <button onClick={next}>&gt;</button>
             </div>  
             <div className="readme">
-                <ReactMarkdown source={data}/>
+                <ReactMarkdown children={markdown}/>
             </div>      
         </>
     )
