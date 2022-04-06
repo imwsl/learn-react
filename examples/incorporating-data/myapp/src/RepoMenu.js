@@ -1,20 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { useMemoIterator } from "./ArrayIterator";
 import { FetchUri } from "./Fetch";
+import ReactMarkdown from 'react-markdown';
 import "./App.css"
 
 export function RepoMenu({
-    repos
+    repos,
+    login
 }) {
     const [{name}, prev, next] = useMemoIterator(repos)
     const [repoName, setRepoName] = useState("")
+    const [url, setUrl] = useState("")
     const {loading, data, error} = FetchUri(
-        ``
+        url
     )
 
     useEffect(() => {
         if (!name) return 
         setRepoName(name)
+
+        let url = `https://api.github.com/repos/${login}/${name}/readme`
+        setUrl(url)
     }, [name])
 
     return (
@@ -23,7 +29,10 @@ export function RepoMenu({
                 <button onClick={prev}>&lt;</button>
                 <p>{name}</p>
                 <button onClick={next}>&gt;</button>
-            </div>        
+            </div>  
+            <div className="readme">
+                <ReactMarkdown source={data}/>
+            </div>      
         </>
     )
 }

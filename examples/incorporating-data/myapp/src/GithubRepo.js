@@ -13,6 +13,6 @@ export function GithubRepo({login}) {
     }
 
     return (<>
-        <RepoMenu repos={data}/>
+        <RepoMenu repos={data} login={login}/>
     </>)
 }
